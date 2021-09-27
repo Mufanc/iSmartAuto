@@ -40,9 +40,22 @@ class Browser(object):
                     for page in pages:
                         if re.match(r'.*me.ismartlearning.cn/center/student/course/bookLearn\.html.*', page['url']):
                             return Page(page['url'], page['webSocketDebuggerUrl'])
-                    await asyncio.sleep(2)  # 这样写跟套 finally 有区别
                 except httpx.ConnectError:
-                    await asyncio.sleep(2)
+                    pass
+                await asyncio.sleep(2)
+
+    async def any_http_page(self):  # 等待任意 http 页面
+        async with httpx.AsyncClient() as client:
+            while True:
+                logger.info('等待可用页面...')
+                try:
+                    pages = (await client.get(f'http://127.0.0.1:{self.port}/json')).json()
+                    for page in pages:
+                        if re.match(r'https?://.*', page['url']):
+                            return Page(page['url'], page['webSocketDebuggerUrl'])
+                except httpx.ConnectError:
+                    pass
+                await asyncio.sleep(2)
 
 
 class Page(object):
