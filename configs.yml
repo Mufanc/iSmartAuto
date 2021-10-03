@@ -4,9 +4,10 @@
 project:
   skip-finished: true  # 跳过已完成任务（暂不支持）
 
-
 # iSmart 客户端配置
 browser:
+  mode: connect  # 连接模式（ connect / launch ）
+  # 下面为 mode = launch 时的配置
   executable: Z:\iSmart\client\iSmart.exe  # 客户端可执行文件的路径
   args:  # 启动 iSmart 客户端时额外提供的参数
     - --disable-web-security
@@ -14,5 +15,24 @@ browser:
 
 # 用户配置（务必保持账号密码与 iSmart 中已登录的相同）
 user:
-  username: <用户名>  # 手机号
+  username: <用户名>  # 用户名/手机号
   password: <密码>  # 密码
+
+# 答题配置
+paper:
+  # 不同题目类型的随机得分
+  ramdom-score:  # Todo: 判断列表长度
+    - 1  # 1.单选
+    - 1  # 2.多选
+    - 1  # 3.判断
+    - [ 0.9, 1 ]  # 4.填空
+    -
+    - [ 0.9, 1 ]  # 6.连线
+    -
+    - 1  # 8.匹配
+    - [ 0.7, 1 ]  # 9.口语跟读
+    - [ 0.7, 1 ]  # 10.短文改错
+    - 1  # 11.选词填空
+  defaults: pause  # 未知题型的处理方式
+  random-time: [ 90, 240 ]  # 每道题的随机用时（秒）
+
