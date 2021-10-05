@@ -51,11 +51,15 @@
 py main.py list -d
 ```
 
+<br/>
+
 * 根据书籍 id 执行刷课
 
 ```shell
 py main.py flash -i 51627#7B6911511DB6B33638F6C58531D8FBD3
 ```
+
+<br/>
 
 * 根据当前打开的页面执行刷课
 
@@ -63,11 +67,11 @@ py main.py flash -i 51627#7B6911511DB6B33638F6C58531D8FBD3
 py main.py flash -c
 ```
 
-&emsp;&emsp;注意如果打开的是「教材学习」页（如下图），只会刷打开的这一本书籍的任务
+注意如果打开的是「教材学习」页（如下图），只会刷打开的这一本书籍的任务
 
 ![](images/booklearn.png)
 
-&emsp;&emsp;而如果是在课程详情页面，则会对该课程下的所有书籍执行刷课：
+而如果是在课程详情页面，则会对该课程下的所有书籍执行刷课：
 
 ![](images/current_course.png)
 
