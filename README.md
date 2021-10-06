@@ -39,7 +39,7 @@
 
 ### 使用方法
 
-&emsp;&emsp;修改 iSmart 的启动快捷方式，增加参数 `--remote-debugging-port=9222`：
+&emsp;&emsp;修改 iSmart 的启动快捷方式，增加参数 `--remote-debugging-port=9222`（如下图），**然后启动 iSmart 客户端并保持登录**
 
 ![](images/edit-lnk.png)
 
