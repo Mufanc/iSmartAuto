@@ -1,4 +1,4 @@
-## iSmart 课程自动姬 v1.0.0
+## iSmart 课程自动姬 v1.0.2
 
 > <div align="center"><b>「不止于自动化，追求极致效率」</b></div><br/>
 > 
@@ -39,14 +39,42 @@
 
 ### 使用方法
 
-&emsp;&emsp;修改 `configs.yml` 中的账号和密码，保证与 iSmart 客户端中登录的账号一致，然后修改 iSmart 的启动快捷方式，增加参数 `--remote-debugging-port=9222`：
+&emsp;&emsp;修改 iSmart 的启动快捷方式，增加参数 `--remote-debugging-port=9222`（如下图），**然后启动 iSmart 客户端并保持登录**
 
 ![](images/edit-lnk.png)
 
-&emsp;&emsp;此时运行 main.py，启动 iSmart 客户端，进入某本书籍的教材学习页（如下图），脚本会自动提交成绩。
+&emsp;&emsp;修改 `configs.yml` 中的账号和密码，保证与 iSmart 客户端中登录的账号一致，然后根据需要调整下方参数。在终端中执行 `py main.py -h` 可以查看更多帮助信息，这里列举几个常用命令
+
+* 列出所有课程和书籍的详细信息
+
+```shell
+py main.py list -d
+```
+
+<br/>
+
+* 根据书籍 id 执行刷课
+
+```shell
+py main.py flash -i 51627#7B6911511DB6B33638F6C58531D8FBD3
+```
+
+<br/>
+
+* 根据当前打开的页面执行刷课
+
+```shell
+py main.py flash -c
+```
+
+注意如果打开的是「教材学习」页（如下图），只会刷打开的这一本书籍的任务
 
 ![](images/booklearn.png)
 
-### 写在最后
+而如果是在课程详情页面，则会对该课程下的所有书籍执行刷课：
 
-&emsp;&emsp;该项目尚处于起步阶段，项目结构还没有完全确定下来，所以后续可能会经历多次重构。目前很多功能虽然存在于源码中，但还不完善或者未经测试，可能造成意料之外的结果，所以在使用前还请三思
+![](images/current_course.png)
+
+### 过滤器语法
+
+* 待完善
