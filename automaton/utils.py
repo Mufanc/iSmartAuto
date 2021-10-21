@@ -1,5 +1,3 @@
-import json
-import urllib.parse as parser
 from random import uniform, randint
 
 from bs4 import BeautifulSoup
