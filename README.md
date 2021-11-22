@@ -39,6 +39,14 @@
 
 ### 使用方法
 
+​		在 iSmartAuto2 目录下打开终端，并输入以下命令安装依赖库
+
+```shell
+pip install -r .\requirements.txt
+```
+
+​		如果提示“pyppeteer 0.2.4 requires websockets<9.0,>=8.1, but you have websockets xxx which is incompatible”，请使用 `pip uninstall websockets` 卸载 websocket 库，然后使用 `pip install websockets==8.1` 安装 websocket 8.1 版本。这之后请不要再使用上面的命令安装依赖库。
+
 &emsp;&emsp;修改 iSmart 的启动快捷方式，增加参数 `--remote-debugging-port=9222`（如下图），**然后启动 iSmart 客户端并保持登录**
 
 ![](images/edit-lnk.png)
