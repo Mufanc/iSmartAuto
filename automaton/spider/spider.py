@@ -1,3 +1,4 @@
+import json
 from hashlib import md5
 from random import random
 
@@ -134,8 +135,9 @@ class Spider(httpx.AsyncClient):
             params={
                 'ticket': ticket
             }
-        )).json()['data']
-        return paper_info
+        )).json()
+        logger.debug(f'paper_info: {json.dumps(paper_info, indent=4)}')
+        return paper_info['data']
 
     async def user_info(self):
         logger.info('正在获取用户信息...')
@@ -168,4 +170,5 @@ class Spider(httpx.AsyncClient):
                 'bookType': 0
             }
         )).json()
+        logger.debug(f'book_info: {json.dumps(book_info, indent=4)}')
         return book_info['data']
