@@ -39,9 +39,34 @@
 
 ### 使用方法
 
+#### 下载源代码
+
+&emsp;&emsp;在合适的位置打开终端，然后执行：
+
+```shell
+git clone https://github.com/Mufanc/iSmartAuto2.git
+cd iSmartAuto2
+```
+
+&emsp;&emsp;如果你是直接下载的源码压缩包，那么直接在解压后的文件夹内打开终端
+
+#### 安装依赖
+
+&emsp;&emsp;在刚刚打开的终端中执行：
+
+```shell
+pip install -r requirements.txt
+```
+
+&emsp;&emsp;感谢 [@cyp0633](https://github.com/cyp0633) 的 [提醒](https://github.com/Mufanc/iSmartAuto2/pull/8)，现已将 `requirements.txt` 中的 websockets 版本降级为 8.1
+
+#### 配置 iSmart 客户端
+
 &emsp;&emsp;修改 iSmart 的启动快捷方式，增加参数 `--remote-debugging-port=9222`（如下图），**然后启动 iSmart 客户端并保持登录**
 
 ![](images/edit-lnk.png)
+
+#### 配置运行参数
 
 &emsp;&emsp;修改 `configs.yml` 中的账号和密码，保证与 iSmart 客户端中登录的账号一致，然后根据需要调整下方参数。在终端中执行 `py main.py -h` 可以查看更多帮助信息，这里列举几个常用命令
 
