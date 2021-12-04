@@ -37,6 +37,8 @@ async def main():
             await utils.flash_current()
         elif args.all:
             await utils.flash_all()
+    else:
+        parser.print_help()
 
 if __name__ == '__main__':
     loop = asyncio.new_event_loop()
