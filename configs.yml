@@ -29,4 +29,4 @@ paper:
   defaults: pause  # 未知题型的处理方式（暂停或使用默认得分）
 #  defaults: [ 1, 1 ]
 
-  random-time: [ 90, 180 ]  # 每道题的随机用时（秒）
+  random-time: [ 60, 120 ]  # 每道题的随机用时（秒）

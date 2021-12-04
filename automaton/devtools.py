@@ -36,11 +36,11 @@ class Browser(object):
         spider_user = configs['user']['username']
         logger.debug(f'spider: {spider_user}')
         logger.debug(f'iSmart client: {json.dumps(user_info, indent=4)}')
-        if spider_user != user_info['mobile'] and spider_user != user_info['username']:
+        if str(spider_user) != user_info['mobile'] and str(spider_user) != user_info['username']:
             logger.warning('检测到 iSmart 客户端中登录的账号与配置文件中账号不符！')
             choice = input('继续使用可能会出现意料之外的问题，是否继续？[y/N]')
             if choice.lower() != 'y':
-                return False
+                exit()
         else:
             logger.info('校验通过！')
         return True
