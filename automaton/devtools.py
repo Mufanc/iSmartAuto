@@ -64,6 +64,8 @@ class Browser(object):
             pages = (await client.get(f'http://127.0.0.1:{self.port}/json')).json()
             for page in pages:
                 params = dict(parser.parse_qsl(parser.urlsplit(page['url']).query))
+                if 'courseId' not in params:
+                    continue
                 if 'bookId' in params:
                     return params['courseId'], params['bookId']
                 return params['courseId'], None
