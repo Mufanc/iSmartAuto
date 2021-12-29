@@ -1,2 +1,4 @@
 /.cache/*
 /venv/
+/.idea/
+/.vscode/

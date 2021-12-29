@@ -1,12 +1,11 @@
-import asyncio
-import json
 import re
-import urllib.parse as parser
-
+import sys
+import json
 import httpx
+import asyncio
 import websockets
+import urllib.parse as parser
 from loguru import logger
-
 from configs import configs
 
 
@@ -22,33 +21,36 @@ class Browser(object):
         self.port = dev_port
 
     async def _verify(self):  # 校验客户端和配置文件中的用户是否相同
-        logger.info('正在校验账号...')
-        page = await self.wait_for_page(r'https?://.*')
-        user_info = json.loads((await page.eval('''
-            (function () {
-                var xhr = new XMLHttpRequest()
-                xhr.open('POST', 'https://school.ismartlearning.cn/client/user/student-info', false)
-                xhr.withCredentials = true
-                xhr.send(null)
-                return xhr.responseText
-            })()
-        '''))['result']['value'])['data']
-        spider_user = configs['user']['username']
-        logger.debug(f'spider: {spider_user}')
-        logger.debug(f'iSmart client: {json.dumps(user_info, indent=4)}')
-        if str(spider_user) != user_info['mobile'] and str(spider_user) != user_info['username']:
-            logger.warning('检测到 iSmart 客户端中登录的账号与配置文件中账号不符！')
-            choice = input('继续使用可能会出现意料之外的问题，是否继续？[y/N]')
-            if choice.lower() != 'y':
-                exit()
-        else:
-            logger.info('校验通过！')
-        return True
+        try:
+            logger.info('[账号校验] | 正在校验账号...')
+            page = await self.wait_for_page(r'https?://.*')
+            user_info = (await page.eval('''
+                (function () {
+                    var xhr = new XMLHttpRequest()
+                    xhr.open('POST', 'https://school.ismartlearning.cn/client/user/student-info', false)
+                    xhr.withCredentials = true
+                    xhr.send(null)
+                    return xhr.responseText
+                })()
+            '''))['result']['value']['data']
+            spider_user = configs['user']['username']
+            logger.debug(f'[账号校验] | 配置文件用户: {spider_user}')
+            logger.debug(f'[账号校验] | 客户端用户: {json.dumps(user_info, indent=4)}')
+            if str(spider_user) != user_info['mobile'] and str(spider_user) != user_info['username']:
+                logger.warning('[账号校验] | 客户端中登录的账号与配置文件中账号不符')
+                choice = input('[账号校验] | 继续使用可能会出现意料之外的问题，是否继续？[y/N]')
+                if choice.lower() != 'y':
+                    exit()
+            else:
+                logger.info('[账号校验] | 校验通过')
+            return True
+        except Exception:
+            exceptionInformation = sys.exc_info()
+            logger.warning(f'[账号校验] | 账号校验出错：{exceptionInformation}')
 
     async def wait_for_page(self, regexp):  # 等待符合条件的页面出现
         async with httpx.AsyncClient() as client:
             while True:
-                logger.info('等待可用页面...')
                 try:
                     pages = (await client.get(f'http://127.0.0.1:{self.port}/json')).json()
                     for page in pages:
