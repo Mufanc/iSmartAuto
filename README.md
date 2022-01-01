@@ -52,7 +52,7 @@ cd iSmartAuto2
 pip install -r requirements.txt
 ```
 
-&emsp;&emsp;感谢 [@cyp0633](https://github.com/cyp0633) 的 [提醒](https://github.com/Mufanc/iSmartAuto2/pull/8)，现已将 `requirements.txt` 中的 websockets 版本降级为 8.1
+/_&emsp;&emsp;感谢 [@cyp0633](https://github.com/cyp0633) 的 [提醒](https://github.com/Mufanc/iSmartAuto2/pull/8)，现已将 `requirements.txt` 中的 websockets 版本降级为 8.1_/
 
 #### 配置 iSmart 客户端
 
@@ -75,7 +75,7 @@ py main.py list -d
 - 根据书籍 id 执行刷课
 
 ```shell
-py main.py flash -i 51627#7B6911511DB6B33638F6C58531D8FBD3
+py main.py flash -i 51627-7B6911511DB6B33638F6C58531D8FBD3
 ```
 
 <br/>
@@ -93,10 +93,6 @@ py main.py flash -c
 而如果是在课程详情页面，则会对该课程下的所有书籍执行刷课：
 
 ![](images/current_course.png)
-
-### 过滤器语法
-
-- 待完善
 
 ### 常见问题
 
