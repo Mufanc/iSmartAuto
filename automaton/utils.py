@@ -105,7 +105,7 @@ async def _flash(course_id, book_id, spider):
 
 async def flash_by_id(identity):
     async with Spider() as spider:
-        await _flash(*identity.split('#'), spider)
+        await _flash(*identity.split('-'), spider)
 
 
 async def flash_current():  # 对当前课程或书籍执行刷课

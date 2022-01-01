@@ -80,7 +80,6 @@ class Spider(httpx.AsyncClient):
 
     async def get_books(self, course_id):  # 获取某课程的书籍列表
         try:
-            logger.info('[获取书籍列表] | 正在获取书籍列表...')
             await self.post(  # 必须有这个请求，否则后面会报错
                 'http://school.ismartlearning.cn/client/course/list-of-student?status=1',
                 data={
@@ -94,7 +93,6 @@ class Spider(httpx.AsyncClient):
                     'courseId': course_id
                 }
             )).json()['data']
-            logger.success('[获取书籍列表] | 获取书籍列表成功')
             return books
         except Exception:
             exceptionInformation = sys.exc_info()
@@ -163,7 +161,7 @@ class Spider(httpx.AsyncClient):
                     'Accept-Encoding': 'gzip, deflate'
                 }
             )).json()['data']
-            logger.debug(f'[获取任务点] | {json.dumps(paper_info, indent=4)}')
+            # logger.debug(f'[获取任务点] | {json.dumps(paper_info, indent=4)}')
             logger.success('[获取任务点] | 获取任务点信息完成')
             return paper_info
         except Exception:
@@ -173,7 +171,7 @@ class Spider(httpx.AsyncClient):
     async def user_info(self):
         try:
             logger.info('[获取用户信息] | 正在获取用户信息...')
-            info = await self.post('https://school.ismartlearning.cn/client/user/student-info').json()
+            info = (await self.post('https://school.ismartlearning.cn/client/user/student-info')).json()
             logger.success('[获取用户信息] | 获取用户信息完成')
             return info
         except Exception:

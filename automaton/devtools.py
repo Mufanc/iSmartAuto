@@ -24,7 +24,7 @@ class Browser(object):
         try:
             logger.info('[账号校验] | 正在校验账号...')
             page = await self.wait_for_page(r'https?://.*')
-            user_info = (await page.eval('''
+            user_info = json.loads((await page.eval('''
                 (function () {
                     var xhr = new XMLHttpRequest()
                     xhr.open('POST', 'https://school.ismartlearning.cn/client/user/student-info', false)
@@ -32,7 +32,7 @@ class Browser(object):
                     xhr.send(null)
                     return xhr.responseText
                 })()
-            '''))['result']['value']['data']
+            '''))['result']['value'])['data']
             spider_user = configs['user']['username']
             logger.debug(f'[账号校验] | 配置文件用户: {spider_user}')
             logger.debug(f'[账号校验] | 客户端用户: {json.dumps(user_info, indent=4)}')
