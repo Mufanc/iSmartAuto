@@ -25,7 +25,7 @@ class Tree:  # 任务树
 
 class Spider(httpx.AsyncClient):
     def __init__(self):
-        super().__init__()
+        super().__init__(follow_redirects=True)
         self.is_login = False
 
     async def login(self, username, password):
