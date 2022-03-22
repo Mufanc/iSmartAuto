@@ -1,7 +1,9 @@
-import sys
-from loguru import logger
-from bs4 import BeautifulSoup
+import traceback
 from random import uniform, randint
+
+from bs4 import BeautifulSoup
+from loguru import logger
+
 from configs import configs
 from .devtools import Browser
 from .spider import Spider
@@ -31,8 +33,7 @@ async def list_books(detail):
                         hint = f'{book["bookName"]}'
                     logger.info(f'[书籍信息] | {hint}')
     except Exception:
-        exceptionInformation = sys.exc_info()
-        logger.warning(f'[读取信息] | 读取信息出错：{exceptionInformation}')
+        logger.warning(f'[读取信息] | 读取信息出错：\n{traceback.format_exc()}')
 
 
 async def _random(spider, paper_id):  # 随机的分数和学习时长
@@ -67,8 +68,7 @@ async def _random(spider, paper_id):  # 随机的分数和学习时长
 
         return int(100 * score / total), time
     except Exception:
-        exceptionInformation = sys.exc_info()
-        logger.warning(f'[处理随机数据] | 处理随机数据出错：{exceptionInformation}')
+        logger.warning(f'[处理随机数据] | 处理随机数据出错：\n{traceback.format_exc()}')
 
 
 async def _flash(course_id, book_id, spider):
@@ -99,8 +99,7 @@ async def _flash(course_id, book_id, spider):
         root = await spider.get_tasks(book_id, book_type, course_id)
         await dfs(root)
     except Exception:
-        exceptionInformation = sys.exc_info()
-        logger.warning(f'[刷任务点] | 刷任务点出错：{exceptionInformation}')
+        logger.warning(f'[刷任务点] | 刷任务点出错：\n{traceback.format_exc()}')
 
 
 async def flash_by_id(identity):

@@ -1,11 +1,13 @@
-import re
-import sys
-import json
-import httpx
 import asyncio
-import websockets
+import json
+import re
+import traceback
 import urllib.parse as parser
+
+import httpx
+import websockets
 from loguru import logger
+
 from configs import configs
 
 
@@ -45,8 +47,7 @@ class Browser(object):
                 logger.info('[账号校验] | 校验通过')
             return True
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[账号校验] | 账号校验出错：{exceptionInformation}')
+            logger.warning(f'[账号校验] | 账号校验出错：\n{traceback.format_exc()}')
 
     async def wait_for_page(self, regexp):  # 等待符合条件的页面出现
         async with httpx.AsyncClient() as client:

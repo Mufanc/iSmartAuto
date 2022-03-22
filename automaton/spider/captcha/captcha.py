@@ -1,7 +1,8 @@
-import sys
+import traceback
+from os import path
+
 import cv2
 import numpy as np
-from os import path
 from loguru import logger
 from numpy import average, dot, linalg
 
@@ -21,8 +22,7 @@ def similarity(img_1, img_2):
         a_norm, b_norm = norms
         return dot(a / a_norm, b / b_norm)
     except Exception:
-        exceptionInformation = sys.exc_info()
-        logger.warning(f'[验证码识别] | 运算出错：{exceptionInformation}')
+        logger.warning(f'[验证码识别] | 运算出错：\n{traceback.format_exc()}')
 
 
 def recognize(img_content: bytes):
@@ -40,5 +40,4 @@ def recognize(img_content: bytes):
         logger.info(f'[验证码识别] | 识别结果：{code}')
         return code
     except Exception:
-        exceptionInformation = sys.exc_info()
-        logger.warning(f'[验证码识别] | 识别出错：{exceptionInformation}')
+        logger.warning(f'[验证码识别] | 识别出错：\n{traceback.format_exc()}')

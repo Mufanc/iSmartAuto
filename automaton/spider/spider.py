@@ -1,8 +1,10 @@
-import sys
 import json
-import httpx
+import traceback
 from hashlib import md5
+
+import httpx
 from loguru import logger
+
 from .captcha import recognize
 
 
@@ -19,8 +21,7 @@ class Tree:  # 任务树
             for ch in self.child:
                 ch.sort()
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[构建任务树] | 排序出错：{exceptionInformation}')
+            logger.warning(f'[构建任务树] | 排序出错：\n{traceback.format_exc()}')
 
 
 class Spider(httpx.AsyncClient):
@@ -58,8 +59,7 @@ class Spider(httpx.AsyncClient):
             logger.success('[登录] | 登录成功')
             return info
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[登录] | 登录出错：{exceptionInformation}')
+            logger.warning(f'[登录] | 登录出错：\n{traceback.format_exc()}')
 
     async def get_courses(self):  # 获取课程列表
         try:
@@ -75,8 +75,7 @@ class Spider(httpx.AsyncClient):
             logger.success('[获取课程列表] | 获取课程列表成功')
             return courses
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[获取课程列表] | 获取课程列表出错：{exceptionInformation}')
+            logger.warning(f'[获取课程列表] | 获取课程列表出错：\n{traceback.format_exc()}')
 
     async def get_books(self, course_id):  # 获取某课程的书籍列表
         try:
@@ -95,8 +94,7 @@ class Spider(httpx.AsyncClient):
             )).json()['data']
             return books
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[获取书籍列表] | 获取书籍列表出错：{exceptionInformation}')
+            logger.warning(f'[获取书籍列表] | 获取书籍列表出错：\n{traceback.format_exc()}')
 
     async def get_tasks(self, book_id, book_type, course_id):  # 获取某书籍的任务树
         try:
@@ -133,8 +131,7 @@ class Spider(httpx.AsyncClient):
             logger.success('[获取任务列表] | 获取任务列表完成')
             return root
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[获取任务列表] | 获取任务列表出错：{exceptionInformation}')
+            logger.warning(f'[获取任务列表] | 获取任务列表出错：\n{traceback.format_exc()}')
 
     async def get_paper(self, paper_id):  # 获取任务点信息（包括题目和答案）
         try:
@@ -165,8 +162,7 @@ class Spider(httpx.AsyncClient):
             logger.success('[获取任务点] | 获取任务点信息完成')
             return paper_info
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[获取任务点] | 获取任务点出错：{exceptionInformation}')
+            logger.warning(f'[获取任务点] | 获取任务点出错：\n{traceback.format_exc()}')
 
     async def user_info(self):
         try:
@@ -175,8 +171,7 @@ class Spider(httpx.AsyncClient):
             logger.success('[获取用户信息] | 获取用户信息完成')
             return info
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[获取用户信息] | 获取用户信息出错：{exceptionInformation}')
+            logger.warning(f'[获取用户信息] | 获取用户信息出错：\n{traceback.format_exc()}')
 
     async def book_info(self, book_id):
         try:
@@ -208,5 +203,4 @@ class Spider(httpx.AsyncClient):
             logger.success('[获取书籍信息] | 获取书籍信息完成')
             return book_info
         except Exception:
-            exceptionInformation = sys.exc_info()
-            logger.warning(f'[获取书籍信息] | 获取书籍信息出错：{exceptionInformation}')
+            logger.warning(f'[获取书籍信息] | 获取书籍信息出错：\n{traceback.format_exc()}')
