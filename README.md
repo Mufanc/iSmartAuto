@@ -94,6 +94,17 @@ py main.py flash -c
 
 ![](images/current_course.png)
 
+### 「父节点不存在」
+
+&emsp;&emsp;由于教材差异，如果你的课程在客户端学习正常，而使用脚本刷课时每个单元都报「父节点不存在」，那么可以将 `spider.py` 119-128 行改成以下内容：
+
+```python
+for task_id in id_record:
+    root.child.append(id_record[task_id])
+```
+
+&emsp;&emsp;将所有任务点直接挂到根节点上
+
 ### 为何关闭 issues
 
 &emsp;&emsp;首先，我要贴上这个：[提问的艺术](https://github.com/betaseeker/How-To-Ask-Questions)
