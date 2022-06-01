@@ -1,8 +1,7 @@
+import httpx
 import json
 import traceback
 from hashlib import md5
-
-import httpx
 from loguru import logger
 
 from .captcha import recognize

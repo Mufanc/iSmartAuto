@@ -1,8 +1,9 @@
-import sys
-import asyncio
-from loguru import logger
-from automaton import utils
 import argparse
+import asyncio
+import sys
+from loguru import logger
+
+from automaton import utils
 
 
 class Help(object):

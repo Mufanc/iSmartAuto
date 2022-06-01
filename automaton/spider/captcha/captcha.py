@@ -1,10 +1,9 @@
-import traceback
-from os import path
-
 import cv2
 import numpy as np
+import traceback
 from loguru import logger
 from numpy import average, dot, linalg
+from os import path
 
 base_path = path.join(path.split(__file__)[0], 'models')
 

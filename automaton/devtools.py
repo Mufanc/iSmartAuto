@@ -1,10 +1,9 @@
 import asyncio
+import httpx
 import json
 import re
 import traceback
 import urllib.parse as parser
-
-import httpx
 import websockets
 from loguru import logger
 

@@ -1,8 +1,7 @@
 import traceback
-from random import uniform, randint
-
 from bs4 import BeautifulSoup
 from loguru import logger
+from random import uniform, randint
 
 from configs import configs
 from .devtools import Browser
