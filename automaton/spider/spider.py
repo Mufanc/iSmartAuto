@@ -35,12 +35,12 @@ class Spider(httpx.AsyncClient):
 
             self.cookies.clear()  # 重置 cookies
             logger.info('[登录] | 正在获取验证码...')
-            result = await self.get('http://sso.ismartlearning.cn/captcha.html')
+            result = await self.get('https://sso.ismartlearning.cn/captcha.html')
             code = recognize(result.content)
             password = md5(md5(password.encode()).hexdigest().encode() + b'fa&s*l%$k!fq$k!ld@fjlk').hexdigest()
             logger.info('[登录] | 正在登录...')
             info = (await self.post(
-                'http://sso.ismartlearning.cn/v2/tickets-v2',
+                'https://sso.ismartlearning.cn/v2/tickets-v2',
                 data={
                     'username': username,
                     'password': password,
@@ -48,8 +48,8 @@ class Spider(httpx.AsyncClient):
                 },
                 headers={
                     'X-Requested-With': 'XMLHttpRequest',
-                    'Origin': 'http://me.ismartlearning.cn',
-                    'Referer': 'http://me.ismartlearning.cn/'
+                    'Origin': 'https://me.ismartlearning.cn',
+                    'Referer': 'https://me.ismartlearning.cn/'
                 }
             )).json()['result']
             logger.debug(f"[登录] | {info}")
@@ -79,14 +79,14 @@ class Spider(httpx.AsyncClient):
     async def get_books(self, course_id):  # 获取某课程的书籍列表
         try:
             await self.post(  # 必须有这个请求，否则后面会报错
-                'http://school.ismartlearning.cn/client/course/list-of-student?status=1',
+                'https://school.ismartlearning.cn/client/course/list-of-student?status=1',
                 data={
                     'pager.currentPage': 1,
                     'pager.pageSize': 100
                 }
             )
             books = (await self.post(
-                'http://school.ismartlearning.cn/client/course/textbook/list-of-student',
+                'https://school.ismartlearning.cn/client/course/textbook/list-of-student',
                 data={
                     'courseId': course_id
                 }
@@ -98,9 +98,9 @@ class Spider(httpx.AsyncClient):
     async def get_tasks(self, book_id, book_type, course_id):  # 获取某书籍的任务树
         try:
             logger.info('[获取任务列表] | 正在获取任务列表...')
-            await self.post('http://school.ismartlearning.cn/client/course/textbook/chapters')
+            await self.post('https://school.ismartlearning.cn/client/course/textbook/chapters')
             tasks = (await self.post(
-                'http://school.ismartlearning.cn/client/course/textbook/chapters',
+                'https://school.ismartlearning.cn/client/course/textbook/chapters',
                 data={
                     'bookId': book_id,
                     'bookType': book_type,
@@ -136,14 +136,14 @@ class Spider(httpx.AsyncClient):
         try:
             logger.info('[获取任务点] | 正在获取任务点信息...')
             ticket = (await self.post(
-                'http://sso.ismartlearning.cn/v1/serviceTicket',
+                'https://sso.ismartlearning.cn/v1/serviceTicket',
                 data={
-                    'service': 'http://xot-api.ismartlearning.cn/client/textbook/paperinfo'
+                    'service': 'https://xot-api.ismartlearning.cn/client/textbook/paperinfo'
                 }
             )).json()['data']['serverTicket']
             logger.debug(f'[获取任务点] | {ticket}')
             paper_info = (await self.post(
-                'http://xot-api.ismartlearning.cn/client/textbook/paperinfo',
+                'https://xot-api.ismartlearning.cn/client/textbook/paperinfo',
                 params={
                     'ticket': ticket
                 },
@@ -151,8 +151,8 @@ class Spider(httpx.AsyncClient):
                     'paperId': paper_id
                 },
                 headers={
-                    'Origin': 'http://me.ismartlearning.cn',
-                    'Referer': 'http://me.ismartlearning.cn/',
+                    'Origin': 'https://me.ismartlearning.cn',
+                    'Referer': 'https://me.ismartlearning.cn/',
                     'X-Requested-With': 'XMLHttpRequest',
                     'Accept-Encoding': 'gzip, deflate'
                 }
@@ -176,14 +176,14 @@ class Spider(httpx.AsyncClient):
         try:
             logger.info('[获取书籍信息] | 正在获取书籍信息...')
             ticket = (await self.post(
-                'http://sso.ismartlearning.cn/v1/serviceTicket',
+                'https://sso.ismartlearning.cn/v1/serviceTicket',
                 data={
-                    'service': 'http://book-api.ismartlearning.cn/client/v2/book/info'
+                    'service': 'https://book-api.ismartlearning.cn/client/v2/book/info'
                 }
             )).json()['data']['serverTicket']
             logger.debug(f'[获取书籍信息] | {ticket}')
             book_info = (await self.post(
-                'http://book-api.ismartlearning.cn/client/v2/book/info',
+                'https://book-api.ismartlearning.cn/client/v2/book/info',
                 params={
                     'ticket': ticket
                 },
@@ -192,8 +192,8 @@ class Spider(httpx.AsyncClient):
                     'bookType': 0
                 },
                 headers={
-                    'Origin': 'http://me.ismartlearning.cn',
-                    'Referer': 'http://me.ismartlearning.cn/',
+                    'Origin': 'https://me.ismartlearning.cn',
+                    'Referer': 'https://me.ismartlearning.cn/',
                     'X-Requested-With': 'XMLHttpRequest',
                     'Accept-Encoding': 'gzip, deflate'
                 }
