@@ -67,7 +67,7 @@ pip install -r requirements.txt
 * 列出所有课程和书籍的详细信息
 
 ```shell
-python main.py list -d
+python main.py -v list -d
 ```
 
 <br/>
@@ -75,7 +75,7 @@ python main.py list -d
 * 根据书籍 id 执行刷课
 
 ```shell
-python main.py flash -i 51627-7B6911511DB6B33638F6C58531D8FBD3
+python main.py -v flash -i 51627-7B6911511DB6B33638F6C58531D8FBD3
 ```
 
 <br/>
@@ -83,7 +83,7 @@ python main.py flash -i 51627-7B6911511DB6B33638F6C58531D8FBD3
 - 根据当前打开的页面执行刷课
 
 ```shell
-python main.py flash -c
+python main.py -v flash -c
 ```
 
 注意如果打开的是「教材学习」页（如下图），只会刷打开的这一本书籍的任务
