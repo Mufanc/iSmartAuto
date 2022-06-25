@@ -94,7 +94,18 @@ python main.py -v flash -c
 
 ![](images/current_course.png)
 
-### 「父节点不存在」
+### 「用户名密码错误」？
+
+&emsp;&emsp;检查你的 `configs.yml` 中帐号密码格式是否正确，它应该不包含两边的尖括号，例如：
+
+```yaml
+# 用户配置（务必保持账号密码与 iSmart 中已登录的相同）
+user:
+  username: Mufanc
+  password: 123456abcdef
+```
+
+### 「父节点不存在」？
 
 &emsp;&emsp;由于教材差异，如果你的课程在客户端学习正常，而使用脚本刷课时每个单元都报「父节点不存在」，那么可以将 `spider.py` 119-128 行改成以下内容：
 
