@@ -21,6 +21,8 @@
 
 &emsp;&emsp;进而，可以通过 Python 调用 [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) （cdp），完成答案的自动提交
 
+&emsp;&emsp;实现细节已上传至[个人博客](https://blog.mufanc.xyz/posts/3824/)
+
 #### Q&A
 
 * **Q：** 既然是回传分数，那为何不用 Python 直接将分数上报，反而要走 cdp？
