@@ -42,8 +42,8 @@
 &emsp;&emsp;在合适的位置打开终端，然后执行：
 
 ```shell
-git clone https://github.com/Mufanc/iSmartAuto2.git
-cd iSmartAuto2
+git clone https://github.com/Mufanc/iSmartAuto.git
+cd iSmartAuto
 ```
 
 &emsp;&emsp;如果你是直接下载的源码压缩包，那么直接在解压后的文件夹内打开终端
@@ -126,6 +126,6 @@ for task_id in id_record:
 
 &emsp;&emsp;另一方面，一些人发问的方式令我难以回答，开发者在修复一个 bug 之前，首先需要能够稳定复现并且定位到问题所在，单凭一两行简单的描述和报错截图的信息往往是不够完成这一切的。对于不同的教材，可能会在少数几个参数上与我所使用的教材不同，导致脚本无法正常使用，而我又没有时间精力去要来每一个遇到问题的小伙伴的帐号并为他们单步调试，或者有些小伙伴会不放心把帐号交给我这个素未谋面的作者。凡此种种，造成了我很难在 issues 中有效地解决问题。
 
-&emsp;&emsp;对于教材差异导致的脚本无法正常使用的问题，如果你有一定的开发能力，恰好又会抓包，完全可以对你的 iSmart 客户端进行抓包，然后简单修改几个参数来让脚本恢复正常，我相信你所需要修改的代码行数不会超过 20 行。举个简单的例子，有很多小伙伴的教材 BookType 不是 0，那么你只需要修改 [这个地方](https://github.com/Mufanc/iSmartAuto2/blob/master/automaton/spider/spider.py#L193)，把 BookType 改成你的教材使用的数值即可（一般是 0, 1, 2, 3）；又或者，假如有一天登录寄了，你应该能能够注意到我在 [这里](https://github.com/Mufanc/iSmartAuto2/blob/master/automaton/spider/spider.py#L41) 硬编码了一段 salt，那么就去网页端看看这个 salt 是不是变了，将其修改成正确的值即可
+&emsp;&emsp;对于教材差异导致的脚本无法正常使用的问题，如果你有一定的开发能力，恰好又会抓包，完全可以对你的 iSmart 客户端进行抓包，然后简单修改几个参数来让脚本恢复正常，我相信你所需要修改的代码行数不会超过 20 行。举个简单的例子，有很多小伙伴的教材 BookType 不是 0，那么你只需要修改 [这个地方](https://github.com/Mufanc/iSmartAuto/blob/master/automaton/spider/spider.py#L193)，把 BookType 改成你的教材使用的数值即可（一般是 0, 1, 2, 3）；又或者，假如有一天登录寄了，你应该能能够注意到我在 [这里](https://github.com/Mufanc/iSmartAuto2/blob/master/automaton/spider/spider.py#L41) 硬编码了一段 salt，那么就去网页端看看这个 salt 是不是变了，将其修改成正确的值即可
 
-&emsp;&emsp;思索再三，我决定关闭 issues 板块，如果有任何问题，可以到 [discussions](https://github.com/Mufanc/iSmartAuto2/discussions) 中提出你的疑问，并寻找有没有使用同样教材的小伙伴。如果我有时间，也有可能会尝试复现你的问题并给出答复
+&emsp;&emsp;思索再三，我决定关闭 issues 板块，如果有任何问题，可以到 [discussions](https://github.com/Mufanc/iSmartAuto/discussions) 中提出你的疑问，并寻找有没有使用同样教材的小伙伴。如果我有时间，也有可能会尝试复现你的问题并给出答复
